@@ -5,6 +5,7 @@ import { rehydrateFile } from '../rehydrate/index.js';
 import { detectOperation, derivePaths, readStdin, writeTextFile } from '../utils/file.js';
 import { getPrompt } from './prompt.js';
 import { lintRxResumeMd } from './lint.js';
+import { fixRxResumeMd } from './fix.js';
 import type { DehydrateResult } from '../dehydrate/types.js';
 import type { RehydrateResult } from '../rehydrate/index.js';
 
@@ -18,6 +19,7 @@ interface CliOptions {
   confirm?: boolean;
   prompt?: boolean;
   lint?: boolean;
+  fix?: boolean;
   jsonErrors?: boolean;
 }
 
@@ -42,6 +44,7 @@ program
   .option('--confirm', 'Required when fuzzy-match identity resolution is used')
   .option('--prompt', 'Print the recommended LLM system prompt to stdout')
   .option('--lint', 'Validate .rxresume.md format without rehydrating')
+  .option('--fix', 'Auto-fix common .rxresume.md formatting issues')
   .option('--json-errors', 'Emit errors as structured JSON to stderr')
   .action(async (inputs: string[], options: CliOptions) => {
     if (options.prompt) {
@@ -54,7 +57,7 @@ program
       process.exit(1);
     }
 
-    if (options.lint) {
+    if (options.lint && !options.fix) {
       let hasErrors = false;
       for (const input of inputs) {
         try {
@@ -77,6 +80,26 @@ program
         }
       }
       process.exit(hasErrors ? 1 : 0);
+    }
+
+    if (options.fix) {
+      let anyFixed = false;
+      for (const input of inputs) {
+        try {
+          const result = await fixRxResumeMd(input);
+          if (result.fixed.length === 0 && result.unfixed.length === 0) {
+            console.error(`${input}: nothing to fix`);
+          } else {
+            for (const f of result.fixed) console.error(`${input}: fixed — ${f}`);
+            for (const u of result.unfixed) console.error(`${input}: unfixed — ${u}`);
+            anyFixed = true;
+          }
+        } catch (error) {
+          const msg = error instanceof Error ? error.message : String(error);
+          console.error(`${input}: error — ${msg}`);
+        }
+      }
+      process.exit(0);
     }
 
     let successCount = 0;
