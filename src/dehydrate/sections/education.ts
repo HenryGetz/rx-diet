@@ -12,8 +12,14 @@ export function serializeEducation(section: EducationSection): string {
   for (const item of section.items) {
     if (item.hidden) continue;
 
+    const raw = item as unknown as Record<string, unknown>;
+    const school = raw.institution as string ?? item.school ?? '';
+    const degree = raw.studyType as string ?? item.degree ?? '';
+    const area = raw.area as string ?? item.area ?? '';
+    const grade = raw.gpa as string ?? item.grade ?? '';
+
     const period = item.period ? normalizePeriod(item.period) : '';
-    const headingParts = [(item.school ?? ''), (item.degree ?? ''), period].filter(
+    const headingParts = [school, degree, period].filter(
       p => (p ?? '').trim().length > 0,
     );
     if (headingParts.length === 0) continue;
@@ -22,8 +28,8 @@ export function serializeEducation(section: EducationSection): string {
     lines.push(`<!-- id:${item.id} -->`);
 
     const metaLines: string[] = [];
-    if (item.area) metaLines.push(`- **Field of Study**: ${item.area}`);
-    if (item.grade) metaLines.push(`- **GPA**: ${item.grade.replace(/^GPA\s+/i, '')}`);
+    if (area) metaLines.push(`- **Field of Study**: ${area}`);
+    if (grade) metaLines.push(`- **GPA**: ${grade.replace(/^GPA\s+/i, '')}`);
     if (metaLines.length > 0) {
       lines.push(...metaLines);
       lines.push('');
