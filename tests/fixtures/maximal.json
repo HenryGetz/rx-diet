@@ -1,0 +1,558 @@
+{
+  "picture": {
+    "hidden": false,
+    "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
+    "size": 256,
+    "rotation": 0,
+    "aspectRatio": 1,
+    "borderRadius": 50,
+    "borderColor": "rgba(59, 130, 246, 1)",
+    "borderWidth": 4,
+    "shadowColor": "rgba(0, 0, 0, 0.15)",
+    "shadowWidth": 8
+  },
+  "basics": {
+    "name": "Alexandra Chen",
+    "headline": "Senior Full-Stack Engineer & Open Source Advocate",
+    "email": "alexandra.chen@example.com",
+    "phone": "+1 (555) 123-4567",
+    "location": "San Francisco, CA",
+    "website": {
+      "url": "https://alexandrachen.dev",
+      "label": "alexandrachen.dev"
+    },
+    "customFields": [
+      {
+        "id": "cf1a2b3c-4d5e-6789-abcd-ef0123456701",
+        "icon": "fab fa-github",
+        "text": "github/alexchen",
+        "link": "https://github.com/alexchen"
+      },
+      {
+        "id": "cf1a2b3c-4d5e-6789-abcd-ef0123456702",
+        "icon": "fab fa-linkedin",
+        "text": "linkedin/in/alexchen",
+        "link": ""
+      },
+      {
+        "id": "cf1a2b3c-4d5e-6789-abcd-ef0123456703",
+        "icon": "",
+        "text": "Signal: alexchen.01",
+        "link": ""
+      }
+    ]
+  },
+  "summary": {
+    "title": "Summary",
+    "columns": 1,
+    "hidden": false,
+    "content": "<p>Senior full-stack engineer with <strong>12+ years</strong> of experience designing and building <em>scalable</em> distributed systems. Passionate about developer tooling, open source, and <strong>mentoring</strong> the next generation of engineers.</p><p>Core competencies:</p><ul><li>Full-stack web development with <strong>React</strong>, TypeScript, and Node.js</li><li>Cloud infrastructure on AWS and GCP (<em>certified</em>)</li><li>System design for high-throughput, low-latency applications</li><li>Open source maintainer and community builder</li></ul><p>Learn more at <a href=\"https://alexandrachen.dev\">alexandrachen.dev</a> or check out my <strong>GitHub</strong> projects.</p>"
+  },
+  "sections": {
+    "profiles": {
+      "title": "Profiles",
+      "columns": 2,
+      "hidden": false,
+      "items": [
+        {
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "hidden": false,
+          "icon": "fab fa-github",
+          "iconColor": "rgba(36, 41, 46, 1)",
+          "network": "GitHub",
+          "username": "alexchen",
+          "website": {
+            "url": "https://github.com/alexchen",
+            "label": "github.com/alexchen",
+            "inlineLink": false
+          }
+        },
+        {
+          "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+          "hidden": false,
+          "icon": "fab fa-linkedin",
+          "iconColor": "rgba(10, 102, 194, 1)",
+          "network": "LinkedIn",
+          "username": "alexandrachen",
+          "website": {
+            "url": "https://linkedin.com/in/alexandrachen",
+            "label": "linkedin.com/in/alexandrachen",
+            "inlineLink": false
+          }
+        }
+      ]
+    },
+    "experience": {
+      "title": "Experience",
+      "columns": 1,
+      "hidden": false,
+      "items": [
+        {
+          "id": "c3d4e5f6-a7b8-9012-cdef-123456789012",
+          "hidden": false,
+          "company": "TechCorp Inc.",
+          "position": "Senior Software Engineer",
+          "location": "San Francisco, CA",
+          "period": "Jan 2020 - Present",
+          "website": {
+            "url": "https://techcorp.example.com",
+            "label": "TechCorp Inc.",
+            "inlineLink": false
+          },
+          "description": "<p>Lead the platform engineering team building the next-generation API gateway serving <strong>10M+</strong> requests per day. Architected a microservices migration that reduced p99 latency by <em>40%</em>.</p>",
+          "roles": []
+        },
+        {
+          "id": "d4e5f6a7-b8c9-0123-defa-234567890123",
+          "hidden": false,
+          "company": "StartupXYZ",
+          "position": "Engineering Lead",
+          "location": "Remote",
+          "period": "Mar 2016 - Dec 2019",
+          "website": {
+            "url": "https://startupxyz.example.com",
+            "label": "StartupXYZ",
+            "inlineLink": false
+          },
+          "description": "<p>Joined as first engineer and grew the team to 15. Drove technical strategy and architecture decisions.</p>",
+          "roles": [
+            {
+              "id": "role-1111-2222-3333-4444-555555555555",
+              "position": "Senior Engineer",
+              "period": "Mar 2016 - Dec 2017",
+              "description": "<p>Built the core SaaS platform from the ground up using React, Node.js, and PostgreSQL. Established CI/CD pipeline and monitoring infrastructure.</p>"
+            },
+            {
+              "id": "role-2222-3333-4444-5555-666666666666",
+              "position": "Engineering Lead",
+              "period": "Jan 2018 - Dec 2019",
+              "description": "<p>Managed a team of 8 engineers across two squads. Introduced agile practices and mentored junior engineers. Drove architecture review process.</p>"
+            }
+          ]
+        },
+        {
+          "id": "e5f6a7b8-c9d0-1234-efab-345678901234",
+          "hidden": false,
+          "company": "WebAgency Co.",
+          "position": "Full-Stack Developer",
+          "location": "New York, NY",
+          "period": "Jun 2014 - Feb 2016",
+          "website": {
+            "url": "",
+            "label": "",
+            "inlineLink": false
+          },
+          "description": "<p>Delivered client projects across diverse industries. Key achievements:</p><ul><li>Built a <strong>real-time</strong> analytics dashboard serving 500+ concurrent users</li><li>Developed a headless CMS platform powering <em>15+</em> enterprise websites</li><li>Created an internal component library used by <strong>40+</strong> developers</li></ul><p>Technologies used: React, AngularJS, Django, PostgreSQL, Redis, Docker.</p><p>Received <strong>Employee of the Year</strong> award in 2015. Visit our work at <a href=\"https://webagency.example.com/portfolio\">webagency.example.com</a>.</p>",
+          "roles": []
+        }
+      ]
+    },
+    "education": {
+      "title": "Education",
+      "columns": 1,
+      "hidden": false,
+      "items": [
+        {
+          "id": "f6a7b8c9-d0e1-2345-fabc-456789012345",
+          "hidden": false,
+          "school": "University of California, Berkeley",
+          "degree": "Bachelor of Science",
+          "area": "Computer Science & Mathematics",
+          "grade": "GPA 3.92",
+          "location": "Berkeley, CA",
+          "period": "Aug 2010 - May 2014",
+          "website": {
+            "url": "https://berkeley.edu",
+            "label": "UC Berkeley",
+            "inlineLink": false
+          },
+          "description": "<p>Graduated with honors. Dean's list all semesters. Teaching assistant for Data Structures and Algorithms.</p><ul><li>Senior thesis on <strong>distributed consensus algorithms</strong></li><li>ACM programming contest finalist</li></ul>"
+        },
+        {
+          "id": "a7b8c9d0-e1f2-3456-abcd-567890123456",
+          "hidden": false,
+          "school": "Stanford University",
+          "degree": "M.S.",
+          "area": "",
+          "grade": "",
+          "location": "",
+          "period": "2022",
+          "website": {
+            "url": "",
+            "label": "",
+            "inlineLink": false
+          },
+          "description": "<p>Part-time Master's in Computer Science focusing on machine learning and distributed systems.</p>"
+        }
+      ]
+    },
+    "projects": {
+      "title": "Projects",
+      "columns": 2,
+      "hidden": false,
+      "items": [
+        {
+          "id": "b8c9d0e1-f2a3-4567-bcde-678901234567",
+          "hidden": false,
+          "name": "KoaCast",
+          "period": "Jan 2023 - Present",
+          "website": {
+            "url": "https://github.com/alexchen/koacast",
+            "label": "github.com/alexchen/koacast",
+            "inlineLink": false
+          },
+          "description": "<p>Open-source podcast hosting platform built with <strong>React</strong>, Node.js, and <strong>PostgreSQL</strong>. Features include audio transcoding, RSS generation, and analytics. 2.5K stars on GitHub.</p>"
+        },
+        {
+          "id": "c9d0e1f2-a3b4-5678-cdef-789012345678",
+          "hidden": false,
+          "name": "DevMetrics CLI",
+          "period": "2022",
+          "website": {
+            "url": "",
+            "label": "",
+            "inlineLink": false
+          },
+          "description": "<p>Command-line tool for analyzing developer productivity metrics from git history and issue trackers. Written in Rust for performance.</p>"
+        }
+      ]
+    },
+    "skills": {
+      "title": "Skills",
+      "columns": 2,
+      "hidden": false,
+      "items": [
+        {
+          "id": "d0e1f2a3-b4c5-6789-defa-890123456789",
+          "hidden": false,
+          "icon": "devicon-typescript-plain",
+          "iconColor": "rgba(49, 120, 198, 1)",
+          "name": "TypeScript",
+          "proficiency": "Expert",
+          "level": 5,
+          "keywords": ["React", "Node.js", "Deno", "Angular"]
+        },
+        {
+          "id": "e1f2a3b4-c5d6-7890-efab-901234567890",
+          "hidden": false,
+          "icon": "devicon-python-plain",
+          "iconColor": "",
+          "name": "Python",
+          "proficiency": "Advanced",
+          "level": 4,
+          "keywords": ["Django", "FastAPI", "NumPy", "Pandas"]
+        },
+        {
+          "id": "f2a3b4c5-d6e7-8901-fabc-012345678901",
+          "hidden": false,
+          "icon": "",
+          "iconColor": "",
+          "name": "DevOps",
+          "proficiency": "Intermediate",
+          "level": 3,
+          "keywords": []
+        }
+      ]
+    },
+    "languages": {
+      "title": "Languages",
+      "columns": 1,
+      "hidden": false,
+      "items": [
+        {
+          "id": "a3b4c5d6-e7f8-9012-abcd-123456789012",
+          "hidden": false,
+          "language": "English",
+          "fluency": "Native",
+          "level": 5
+        },
+        {
+          "id": "b4c5d6e7-f8a9-0123-bcde-234567890123",
+          "hidden": false,
+          "language": "Mandarin Chinese",
+          "fluency": "Fluent",
+          "level": 4
+        }
+      ]
+    },
+    "interests": {
+      "title": "Interests",
+      "columns": 2,
+      "hidden": false,
+      "items": [
+        {
+          "id": "c5d6e7f8-a9b0-1234-cdef-345678901234",
+          "hidden": false,
+          "icon": "fas fa-hiking",
+          "iconColor": "rgba(34, 197, 94, 1)",
+          "name": "Hiking & Outdoor Sports",
+          "keywords": ["Trail running", "Rock climbing", "Backpacking", "Photography"]
+        },
+        {
+          "id": "d6e7f8a9-b0c1-2345-defa-456789012345",
+          "hidden": true,
+          "icon": "fas fa-chess",
+          "iconColor": "",
+          "name": "Chess",
+          "keywords": ["Tournament play", "Blitz", "Strategy"]
+        }
+      ]
+    },
+    "awards": {
+      "title": "Awards",
+      "columns": 1,
+      "hidden": false,
+      "items": [
+        {
+          "id": "e7f8a9b0-c1d2-3456-efab-567890123456",
+          "hidden": false,
+          "title": "Engineering Excellence Award",
+          "awarder": "TechCorp Inc.",
+          "date": "2023-06",
+          "website": {
+            "url": "",
+            "label": "",
+            "inlineLink": false
+          },
+          "description": "<p>Recognized for outstanding contribution to the platform reliability initiative, achieving <strong>99.99% uptime</strong> for the API gateway.</p>"
+        },
+        {
+          "id": "f8a9b0c1-d2e3-4567-fabc-678901234567",
+          "hidden": false,
+          "title": "Best Paper Award",
+          "awarder": "ACM SysConf",
+          "date": "2022",
+          "website": {
+            "url": "https://example.com/awards/best-paper-2022",
+            "label": "Conference Proceedings",
+            "inlineLink": false
+          },
+          "description": "<p>Awarded for the paper <em>\"Scaling Event-Driven Architectures with Conflict-Free Replicated Data Types\"</em> at the 2022 ACM International Conference on Distributed Systems.</p>"
+        }
+      ]
+    },
+    "certifications": {
+      "title": "Certifications",
+      "columns": 1,
+      "hidden": false,
+      "items": [
+        {
+          "id": "a9b0c1d2-e3f4-5678-abcd-789012345678",
+          "hidden": false,
+          "title": "AWS Solutions Architect - Professional",
+          "issuer": "Amazon Web Services",
+          "date": "2023-03",
+          "website": {
+            "url": "https://aws.amazon.com/certification",
+            "label": "AWS Certification",
+            "inlineLink": false
+          },
+          "description": "<p>Professional-level certification validating advanced skills in designing distributed systems on AWS. Covers <strong>microservices</strong>, serverless, and enterprise-grade security patterns.</p>"
+        },
+        {
+          "id": "b0c1d2e3-f4a5-6789-bcde-890123456789",
+          "hidden": false,
+          "title": "Google Cloud Professional Data Engineer",
+          "issuer": "Google Cloud",
+          "date": "2022-11",
+          "website": {
+            "url": "",
+            "label": "",
+            "inlineLink": false
+          },
+          "description": "<p>Certification for designing and building data processing systems on Google Cloud Platform.</p>"
+        }
+      ]
+    },
+    "publications": {
+      "title": "Publications",
+      "columns": 1,
+      "hidden": false,
+      "items": [
+        {
+          "id": "c1d2e3f4-a5b6-7890-cdef-901234567890",
+          "hidden": false,
+          "title": "Scaling Event-Driven Architectures with Conflict-Free Replicated Data Types",
+          "publisher": "ACM International Conference on Distributed Systems (SysConf 2022)",
+          "date": "2022-10",
+          "website": {
+            "url": "https://doi.org/10.1234/example",
+            "label": "DOI: 10.1234/example",
+            "inlineLink": false
+          },
+          "description": "<p>Published paper presenting a novel approach to <strong>conflict resolution</strong> in <em>event-driven systems</em> using CRDTs. The proposed architecture reduces synchronization overhead by up to 60% in geo-distributed deployments.</p>"
+        },
+        {
+          "id": "d2e3f4a5-b6c7-8901-defa-012345678901",
+          "hidden": false,
+          "title": "Building Resilient Microservices: A Practical Guide",
+          "publisher": "TechPress Publishing",
+          "date": "2021-08",
+          "website": {
+            "url": "",
+            "label": "",
+            "inlineLink": false
+          },
+          "description": "<p>Authored a comprehensive guide covering circuit breakers, bulkheads, retry policies, and observability patterns for <strong>microservice</strong> architectures.</p>"
+        }
+      ]
+    },
+    "volunteer": {
+      "title": "Volunteer",
+      "columns": 1,
+      "hidden": false,
+      "items": [
+        {
+          "id": "e3f4a5b6-c7d8-9012-efab-123456789012",
+          "hidden": false,
+          "organization": "CodeBridge Foundation",
+          "position": "Mentor & Curriculum Developer",
+          "location": "San Francisco, CA",
+          "period": "Jan 2021 - Present",
+          "website": {
+            "url": "https://codebridge.example.org",
+            "label": "CodeBridge Foundation",
+            "inlineLink": false
+          },
+          "description": "<p>Teach <strong>web development</strong> to underrepresented groups in tech. Developed a 12-week curriculum covering HTML, CSS, JavaScript, and React. Mentored <em>50+</em> students through career transitions.</p>"
+        }
+      ]
+    },
+    "references": {
+      "title": "References",
+      "columns": 1,
+      "hidden": false,
+      "items": [
+        {
+          "id": "f4a5b6c7-d8e9-0123-fabc-234567890123",
+          "hidden": false,
+          "name": "Dr. Michael Torres",
+          "position": "VP of Engineering, TechCorp Inc.",
+          "phone": "+1 (555) 987-6543",
+          "email": "michael.torres@techcorp.example.com",
+          "website": {
+            "url": "https://linkedin.com/in/michaeltorres",
+            "label": "Michael Torres on LinkedIn",
+            "inlineLink": false
+          },
+          "description": "<p>\"Alexandra is one of the most talented engineers I have had the pleasure of working with. Her technical depth, leadership skills, and ability to <strong>communicate complex ideas</strong> make her an invaluable asset to any team.\"</p>"
+        }
+      ]
+    }
+  },
+  "customSections": [
+    {
+      "id": "a1b2c3d4-e5f6-7890-abcd-customsection01",
+      "title": "Conference Talks",
+      "columns": 2,
+      "hidden": false,
+      "type": "awards",
+      "items": [
+        {
+          "id": "b2c3d4e5-f6a7-8901-bcde-customitem001",
+          "hidden": false,
+          "title": "Reacting to the Future: Server Components in Production",
+          "awarder": "ReactConf 2023",
+          "date": "2023-05",
+          "website": {
+            "url": "https://reactconf.example.com/talks/server-components",
+            "label": "Talk Recording",
+            "inlineLink": false
+          },
+          "description": "<p>Delivered a talk on migrating a production Next.js application to the new <strong>React Server Components</strong> architecture, covering data fetching patterns, streaming SSR, and incremental adoption strategies.</p>"
+        },
+        {
+          "id": "c3d4e5f6-a7b8-9012-cdef-customitem002",
+          "hidden": false,
+          "title": "From Monolith to Microservices: Lessons Learned",
+          "awarder": "Distributed Systems Summit 2022",
+          "date": "2022-09",
+          "website": {
+            "url": "",
+            "label": "",
+            "inlineLink": false
+          },
+          "description": "<p>Presented a case study on decomposing a monolithic Rails application into a <strong>microservices</strong> architecture, covering domain-driven design, event sourcing, and migration without downtime.</p>"
+        }
+      ]
+    },
+    {
+      "id": "d4e5f6a7-b8c9-0123-defa-hiddencustom01",
+      "title": "Hidden Custom Section",
+      "columns": 1,
+      "hidden": true,
+      "type": "summary",
+      "items": [
+        {
+          "id": "e5f6a7b8-c9d0-1234-efab-hiddenitem01",
+          "hidden": false,
+          "content": "<p>This should never appear in the markdown output because the section is hidden.</p>"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "template": "onyx",
+    "layout": {
+      "sidebarWidth": 35,
+      "pages": [
+        {
+          "fullWidth": false,
+          "main": [
+            "summary",
+            "experience",
+            "education",
+            "projects",
+            "awards",
+            "certifications",
+            "publications",
+            "volunteer",
+            "a1b2c3d4-e5f6-7890-abcd-customsection01"
+          ],
+          "sidebar": [
+            "profiles",
+            "skills",
+            "languages",
+            "interests",
+            "references"
+          ]
+        }
+      ]
+    },
+    "page": {
+      "gapX": 14,
+      "gapY": 10,
+      "marginX": 48,
+      "marginY": 48,
+      "format": "letter",
+      "locale": "en-US",
+      "hideIcons": false
+    },
+    "design": {
+      "level": {
+        "icon": "star-fill",
+        "type": "icon"
+      },
+      "colors": {
+        "primary": "rgba(37, 99, 235, 1)",
+        "text": "rgba(0, 0, 0, 1)",
+        "background": "rgba(255, 255, 255, 1)"
+      }
+    },
+    "typography": {
+      "body": {
+        "fontFamily": "Noto Sans",
+        "fontWeights": ["400", "600"],
+        "fontSize": 11,
+        "lineHeight": 1.5
+      },
+      "heading": {
+        "fontFamily": "Noto Sans",
+        "fontWeights": ["700"],
+        "fontSize": 14,
+        "lineHeight": 1.3
+      }
+    },
+    "notes": "<p>This is an internal draft version 3.2. Pending review by hiring manager <strong>before</strong> public distribution. Contact HR for the official version.</p>"
+  }
+}

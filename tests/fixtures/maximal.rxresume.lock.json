@@ -1,0 +1,32 @@
+{
+  "id_map": {
+    "summary": "_summary",
+    "sections.profiles.0": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "sections.profiles.1": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+    "sections.experience.0": "c3d4e5f6-a7b8-9012-cdef-123456789012",
+    "sections.experience.1": "d4e5f6a7-b8c9-0123-defa-234567890123",
+    "sections.experience.2": "e5f6a7b8-c9d0-1234-efab-345678901234",
+    "sections.education.0": "f6a7b8c9-d0e1-2345-fabc-456789012345",
+    "sections.education.1": "a7b8c9d0-e1f2-3456-abcd-567890123456",
+    "sections.projects.0": "b8c9d0e1-f2a3-4567-bcde-678901234567",
+    "sections.projects.1": "c9d0e1f2-a3b4-5678-cdef-789012345678",
+    "sections.skills.0": "d0e1f2a3-b4c5-6789-defa-890123456789",
+    "sections.skills.1": "e1f2a3b4-c5d6-7890-efab-901234567890",
+    "sections.skills.2": "f2a3b4c5-d6e7-8901-fabc-012345678901",
+    "sections.languages.0": "a3b4c5d6-e7f8-9012-abcd-123456789012",
+    "sections.languages.1": "b4c5d6e7-f8a9-0123-bcde-234567890123",
+    "sections.interests.0": "c5d6e7f8-a9b0-1234-cdef-345678901234",
+    "sections.interests.1": "d6e7f8a9-b0c1-2345-defa-456789012345",
+    "sections.awards.0": "e7f8a9b0-c1d2-3456-efab-567890123456",
+    "sections.awards.1": "f8a9b0c1-d2e3-4567-fabc-678901234567",
+    "sections.certifications.0": "a9b0c1d2-e3f4-5678-abcd-789012345678",
+    "sections.certifications.1": "b0c1d2e3-f4a5-6789-bcde-890123456789",
+    "sections.publications.0": "c1d2e3f4-a5b6-7890-cdef-901234567890",
+    "sections.publications.1": "d2e3f4a5-b6c7-8901-defa-012345678901",
+    "sections.volunteer.0": "e3f4a5b6-c7d8-9012-efab-123456789012",
+    "sections.references.0": "f4a5b6c7-d8e9-0123-fabc-234567890123",
+    "customSections.0.0": "b2c3d4e5-f6a7-8901-bcde-customitem001",
+    "customSections.0.1": "c3d4e5f6-a7b8-9012-cdef-customitem002",
+    "customSections.1.0": "e5f6a7b8-c9d0-1234-efab-hiddenitem01"
+  }
+}

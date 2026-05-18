@@ -1,0 +1,66 @@
+{
+  "name": "rx-diet",
+  "version": "1.0.0",
+  "description": "Token-efficient bidirectional bridge between Reactive Resume JSON and specialized Markdown",
+  "license": "MIT",
+  "author": "HenryGetz",
+  "type": "module",
+  "bin": {
+    "rx-diet": "./bin/rx-diet.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist/",
+    "bin/",
+    "src/schema/v5/rr-schema.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx src/index.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:property": "vitest run --config vitest.property.config.ts",
+    "test:llm": "vitest run --config vitest.llm.config.ts",
+    "lint": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "commander": "^13.1.0",
+    "js-yaml": "^4.1.0",
+    "marked": "^15.0.12",
+    "turndown": "^7.2.1"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^22.13.0",
+    "fast-check": "^3.23.2",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.3",
+    "vitest": "^2.1.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "resume",
+    "reactive-resume",
+    "markdown",
+    "cli",
+    "llm",
+    "token-efficient"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HenryGetz/rx-diet"
+  }
+}
