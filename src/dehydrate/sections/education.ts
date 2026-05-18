@@ -35,13 +35,13 @@ export function serializeEducation(section: EducationSection): string {
       lines.push('');
     }
 
-    if (item.description) {
-      lines.push(htmlToMarkdown(item.description));
+    if (item.location) {
+      lines.push(`- **Location**: ${item.location}`);
       lines.push('');
     }
 
-    if (item.location) {
-      lines.push(`- **Location**: ${item.location}`);
+    if (item.description) {
+      lines.push(htmlToMarkdown(item.description));
       lines.push('');
     }
 

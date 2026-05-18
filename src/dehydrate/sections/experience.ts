@@ -21,13 +21,13 @@ export function serializeExperience(section: ExperienceSection): string {
     lines.push(`### ${headingParts.join(' | ')}`);
     lines.push(`<!-- id:${item.id} -->`);
 
-    if (item.description) {
-      lines.push(htmlToMarkdown(item.description));
+    if (item.location) {
+      lines.push(`- **Location**: ${item.location}`);
       lines.push('');
     }
 
-    if (item.location) {
-      lines.push(`- **Location**: ${item.location}`);
+    if (item.description) {
+      lines.push(htmlToMarkdown(item.description));
       lines.push('');
     }
 
