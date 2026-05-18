@@ -26,6 +26,11 @@ export function serializeExperience(section: ExperienceSection): string {
       lines.push('');
     }
 
+    if (item.location) {
+      lines.push(`- **Location**: ${item.location}`);
+      lines.push('');
+    }
+
     if (item.website?.url) {
       const label = item.website.label || item.website.url;
       lines.push(`- **Website**: [${label}](${item.website.url})`);

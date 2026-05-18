@@ -40,11 +40,15 @@ Learn more at [alexandrachen.dev](https://alexandrachen.dev) or check out my **G
 <!-- id:c3d4e5f6-a7b8-9012-cdef-123456789012 -->
 Lead the platform engineering team building the next-generation API gateway serving **10M+** requests per day. Architected a microservices migration that reduced p99 latency by *40%*.
 
+- **Location**: San Francisco, CA
+
 - **Website**: [TechCorp Inc.](https://techcorp.example.com)
 
 ### Engineering Lead | StartupXYZ | 2016-03 - 2019-12
 <!-- id:d4e5f6a7-b8c9-0123-defa-234567890123 -->
 Joined as first engineer and grew the team to 15. Drove technical strategy and architecture decisions.
+
+- **Location**: Remote
 
 - **Website**: [StartupXYZ](https://startupxyz.example.com)
 
@@ -66,6 +70,8 @@ Technologies used: React, AngularJS, Django, PostgreSQL, Redis, Docker.
 
 Received **Employee of the Year** award in 2015. Visit our work at [webagency.example.com](https://webagency.example.com/portfolio).
 
+- **Location**: New York, NY
+
 ## Education
 
 ### University of California, Berkeley | Bachelor of Science | 2010-08 - 2014-05
@@ -77,6 +83,8 @@ Graduated with honors. Dean's list all semesters. Teaching assistant for Data St
 
 - Senior thesis on **distributed consensus algorithms**
 - ACM programming contest finalist
+
+- **Location**: Berkeley, CA
 
 - **Website**: [UC Berkeley](https://berkeley.edu)
 
@@ -157,6 +165,8 @@ Authored a comprehensive guide covering circuit breakers, bulkheads, retry polic
 ### CodeBridge Foundation | Mentor & Curriculum Developer | 2021-01 - Present
 <!-- id:e3f4a5b6-c7d8-9012-efab-123456789012 -->
 Teach **web development** to underrepresented groups in tech. Developed a 12-week curriculum covering HTML, CSS, JavaScript, and React. Mentored *50+* students through career transitions.
+
+- **Location**: San Francisco, CA
 
 - **Website**: [CodeBridge Foundation](https://codebridge.example.org)
 
