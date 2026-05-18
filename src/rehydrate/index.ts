@@ -172,7 +172,8 @@ export async function rehydrate(
     restoreAssets(mergeResult.merged, assetStore);
   }
 
-  // ── 9. Validate ────────────────────────────────────────────────────
+  // ── 9. Normalize and validate ──────────────────────────────────────
+  normalizeResume(mergeResult.merged);
   const validation = validateResume(mergeResult.merged as unknown);
   if (!validation.valid) {
     const errorLines = validation.errors
@@ -222,11 +223,12 @@ export async function rehydrateFile(
 
   if (options?.diff) {
     let base: ResumeData;
+    const basePath = options?.base ?? paths.base;
     try {
-      base = await readJsonFile<ResumeData>(paths.base);
+      base = await readJsonFile<ResumeData>(basePath);
     } catch (cause) {
       throw new Error(
-        `Cannot compute diff: failed to read base JSON "${paths.base}": ` +
+        `Cannot compute diff: failed to read base JSON "${basePath}": ` +
         `${cause instanceof Error ? cause.message : String(cause)}`,
       );
     }
@@ -242,18 +244,19 @@ export async function rehydrateFile(
   }
 
   if (options?.inPlace) {
+    const inPlacePath = options?.base ?? paths.base;
     if (options?.backup) {
       const { copyFile } = await import('node:fs/promises');
       try {
-        await copyFile(paths.base, `${paths.base}.bak`);
+        await copyFile(inPlacePath, `${inPlacePath}.bak`);
       } catch (cause) {
         throw new Error(
-          `Failed to create backup at "${paths.base}.bak": ` +
+          `Failed to create backup at "${inPlacePath}.bak": ` +
           `${cause instanceof Error ? cause.message : String(cause)}`,
         );
       }
     }
-    await writeJsonFile(paths.base, result.merged, true);
+    await writeJsonFile(inPlacePath, result.merged, true);
     return result;
   }
 
@@ -448,5 +451,90 @@ function mapHeadingParts(
 
     default:
       break;
+  }
+}
+
+function normalizeResume(data: ResumeData): void {
+  if (!data.picture) {
+    data.picture = {
+      hidden: false, url: "", size: 80, rotation: 0, aspectRatio: 1,
+      borderRadius: 0, borderColor: "rgba(0,0,0,0.5)", borderWidth: 0,
+      shadowColor: "rgba(0,0,0,0.5)", shadowWidth: 0,
+    };
+  }
+  if (!data.summary) {
+    data.summary = { title: "Summary", columns: 1, hidden: false, content: "" };
+  }
+  if (data.basics && !data.basics.website) {
+    data.basics.website = { url: "", label: "" };
+  }
+  if (!data.customSections) {
+    data.customSections = [];
+  }
+  const sections = data.sections as unknown as Record<string, Record<string, unknown> | undefined> | undefined;
+  if (sections) {
+    const allSectionKeys = ["profiles","experience","education","projects","skills","languages","interests","awards","certifications","publications","volunteer","references"];
+    for (const key of allSectionKeys) {
+      if (!sections[key]) {
+        sections[key] = { title: "", columns: 1, hidden: false, items: [] };
+      }
+    }
+    for (const [key, section] of Object.entries(sections)) {
+      if (!section || typeof section !== "object") continue;
+      if (section.title === undefined) section.title = "";
+      if (section.hidden === undefined) section.hidden = false;
+      if (section.columns === undefined) section.columns = 1;
+      const items = section.items as Record<string, unknown>[] | undefined;
+      if (items) {
+        for (const item of items) {
+          if (item.hidden === undefined) item.hidden = false;
+          if (key === "skills" || key === "languages") {
+            if (item.icon === undefined) item.icon = "";
+            if (item.proficiency === undefined) item.proficiency = "";
+          }
+          if (key === "profiles" && item.icon === undefined) {
+            item.icon = "";
+            item.iconColor = "";
+          }
+          if (item.website === undefined) {
+            item.website = { url: "", label: "" };
+          }
+          // Fill required string fields with empty defaults
+          if (key === "experience" || key === "education" || key === "projects" || key === "volunteer") {
+            if (item.period === undefined) item.period = "";
+          }
+          if (key === "education") {
+            if (item.grade === undefined) item.grade = "";
+            if (item.location === undefined) item.location = "";
+          }
+          if (key === "references") {
+            if (item.position === undefined) item.position = "";
+            if (item.phone === undefined) item.phone = "";
+          }
+        }
+      }
+    }
+  }
+  // Normalize metadata for JSON Resume format
+  if (data.metadata) {
+    const m = data.metadata as unknown as Record<string, unknown>;
+    if (Array.isArray(m.layout)) {
+      m.layout = { sidebarWidth: 35, pages: [{ fullWidth: false, main: [], sidebar: [] }] };
+    }
+    if (!m.design) {
+      m.design = { level: { icon: "star", type: "circle" }, colors: { primary: "rgba(0,0,0,1)", text: "rgba(0,0,0,1)", background: "rgba(255,255,255,1)" } };
+    }
+    if (m.typography && typeof m.typography === "object") {
+      const t = m.typography as Record<string, unknown>;
+      if (!t.body) t.body = { fontFamily: "Inter", fontWeights: ["400"], fontSize: 11, lineHeight: 1.5 };
+      if (!t.heading) t.heading = { fontFamily: "Inter", fontWeights: ["600"], fontSize: 14, lineHeight: 1.5 };
+    }
+    if (m.page && typeof m.page === "object") {
+      const p = m.page as Record<string, unknown>;
+      if (p.gapX === undefined) p.gapX = 4;
+      if (p.gapY === undefined) p.gapY = 6;
+      if (p.marginX === undefined) p.marginX = 14;
+      if (p.marginY === undefined) p.marginY = 12;
+    }
   }
 }

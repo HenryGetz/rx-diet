@@ -38,6 +38,7 @@
     "commander": "^13.1.0",
     "js-yaml": "^4.1.0",
     "marked": "^15.0.12",
+    "rx-ruler": "file:../rx-ruler",
     "turndown": "^7.2.1"
   },
   "devDependencies": {
