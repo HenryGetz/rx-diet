@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 import type { ResumeData, RxFrontmatter } from '../utils/types.js';
 import type { DehydrateResult, DehydrateOptions } from './types.js';
 import { validateResumeLenient, validateResume, SCHEMA_VERSION, GRAMMAR_VERSION } from '../schema/v5/index.js';
@@ -168,6 +169,23 @@ function normalizeResume(data: ResumeData): void {
     data.customSections = [];
   }
 
+  // Ensure basics.customFields is always an array
+  if (data.basics && (!data.basics.customFields || !Array.isArray(data.basics.customFields))) {
+    data.basics.customFields = [];
+  }
+
+  // Fill missing metadata (required by rx-ruler)
+  if (!data.metadata) {
+    data.metadata = {
+      template: "",
+      layout: { sidebarWidth: 35, pages: [{ fullWidth: false, main: [], sidebar: [] }] },
+      page: { gapX: 4, gapY: 6, marginX: 14, marginY: 12, format: "", locale: "", hideIcons: false },
+      design: { level: { icon: "star", type: "circle" }, colors: { primary: "rgba(0,0,0,1)", text: "rgba(0,0,0,1)", background: "rgba(255,255,255,1)" } },
+      typography: { body: { fontFamily: "Inter", fontWeights: ["400"], fontSize: 11, lineHeight: 1.5 }, heading: { fontFamily: "Inter", fontWeights: ["600"], fontSize: 14, lineHeight: 1.5 } },
+      notes: "",
+    };
+  }
+
   // Fill per-section defaults for missing fields
   const sections = data.sections as unknown as Record<string, Record<string, unknown> | undefined> | undefined;
   if (sections) {
@@ -180,17 +198,77 @@ function normalizeResume(data: ResumeData): void {
       const items = section.items as Record<string, unknown>[] | undefined;
       if (items) {
         for (const item of items) {
+          if (item.id === undefined) item.id = crypto.randomUUID();
           if (item.hidden === undefined) item.hidden = false;
-          if (key === "skills" || key === "languages") {
-            if (item.icon === undefined) item.icon = "";
-            if (item.proficiency === undefined) item.proficiency = "";
-          }
-          if (key === "profiles" && item.icon === undefined) {
-            item.icon = "";
-            item.iconColor = "";
-          }
           if (item.website === undefined) {
-            item.website = { url: "", label: "" };
+            item.website = { url: "", label: "", inlineLink: false };
+          }
+
+          if (key === "profiles") {
+            if (item.icon === undefined) item.icon = "";
+            if (item.iconColor === undefined) item.iconColor = "";
+            if (item.network === undefined) item.network = "";
+            if (item.username === undefined) item.username = "";
+          } else if (key === "experience") {
+            if (item.company === undefined) item.company = "";
+            if (item.position === undefined) item.position = "";
+            if (item.location === undefined) item.location = "";
+            if (item.period === undefined) item.period = "";
+            if (item.description === undefined) item.description = "";
+            if (item.roles === undefined) item.roles = [];
+          } else if (key === "education") {
+            if (item.school === undefined) item.school = "";
+            if (item.degree === undefined) item.degree = "";
+            if (item.area === undefined) item.area = "";
+            if (item.grade === undefined) item.grade = "";
+            if (item.location === undefined) item.location = "";
+            if (item.period === undefined) item.period = "";
+            if (item.description === undefined) item.description = "";
+          } else if (key === "projects") {
+            if (item.name === undefined) item.name = "";
+            if (item.period === undefined) item.period = "";
+            if (item.description === undefined) item.description = "";
+          } else if (key === "skills") {
+            if (item.icon === undefined) item.icon = "";
+            if (item.iconColor === undefined) item.iconColor = "";
+            if (item.name === undefined) item.name = "";
+            if (item.proficiency === undefined) item.proficiency = "";
+            if (item.level === undefined) item.level = 0;
+            if (item.keywords === undefined) item.keywords = [];
+          } else if (key === "languages") {
+            if (item.language === undefined) item.language = "";
+            if (item.fluency === undefined) item.fluency = "";
+            if (item.level === undefined) item.level = 0;
+          } else if (key === "interests") {
+            if (item.icon === undefined) item.icon = "";
+            if (item.iconColor === undefined) item.iconColor = "";
+            if (item.name === undefined) item.name = "";
+            if (item.keywords === undefined) item.keywords = [];
+          } else if (key === "awards") {
+            if (item.title === undefined) item.title = "";
+            if (item.awarder === undefined) item.awarder = "";
+            if (item.date === undefined) item.date = "";
+            if (item.description === undefined) item.description = "";
+          } else if (key === "certifications") {
+            if (item.title === undefined) item.title = "";
+            if (item.issuer === undefined) item.issuer = "";
+            if (item.date === undefined) item.date = "";
+            if (item.description === undefined) item.description = "";
+          } else if (key === "publications") {
+            if (item.title === undefined) item.title = "";
+            if (item.publisher === undefined) item.publisher = "";
+            if (item.date === undefined) item.date = "";
+            if (item.description === undefined) item.description = "";
+          } else if (key === "volunteer") {
+            if (item.organization === undefined) item.organization = "";
+            if (item.location === undefined) item.location = "";
+            if (item.period === undefined) item.period = "";
+            if (item.description === undefined) item.description = "";
+          } else if (key === "references") {
+            if (item.name === undefined) item.name = "";
+            if (item.position === undefined) item.position = "";
+            if (item.phone === undefined) item.phone = "";
+            if (item.description === undefined) item.description = "";
           }
         }
       }

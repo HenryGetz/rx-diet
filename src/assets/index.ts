@@ -42,7 +42,7 @@ export function extractAssets(data: ResumeData): [ResumeData, AssetStore, number
     count += checkAndReplace(cleaned, 'picture.url', cleaned.picture as unknown as Record<string, unknown>, 'url', store);
   }
 
-  if (cleaned.basics?.customFields) {
+  if (cleaned.basics?.customFields && Array.isArray(cleaned.basics.customFields)) {
     for (let i = 0; i < cleaned.basics.customFields.length; i++) {
       const field = cleaned.basics.customFields[i];
       if (!field) continue;

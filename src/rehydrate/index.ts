@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 import { readTextFile, readJsonFile, writeJsonFile, derivePaths } from '../utils/file.js';
 import { parseFrontmatter } from '../utils/yaml.js';
 import { validateResume, GRAMMAR_VERSION } from '../schema/v5/index.js';
@@ -46,6 +47,48 @@ const SECTION_KEYS: ReadonlySet<string> = new Set([
   'volunteer',
   'references',
 ]);
+
+// ─── Validation Error Formatting ────────────────────────────────────────
+
+function formatValidationError(errors: Array<{ path: string; message: string }>): string {
+  const lines: string[] = [];
+  lines.push('Your .rxresume.md rehydrated to JSON that failed schema validation.');
+  lines.push('');
+
+  const bySection: Record<string, Array<{ path: string; message: string }>> = {};
+  for (const err of errors) {
+    const section = err.path.replace(/^\//, '').split('/')[0] || '/';
+    if (!bySection[section]) bySection[section] = [];
+    bySection[section].push(err);
+  }
+
+  for (const [section, sectionErrors] of Object.entries(bySection)) {
+    lines.push(`  ${section}:`);
+    for (const err of sectionErrors.slice(0, 5)) {
+      const field = err.path.split('/').pop() || err.path;
+      if (err.message.includes('missing') || err.message.includes("is required")) {
+        lines.push(`    Missing required field: ${field} — add this field to the .rxresume.md or the base JSON`);
+      } else if (err.message.includes('expected') || err.message.includes('must be')) {
+        lines.push(`    Wrong type for ${field}: ${err.message}`);
+      } else {
+        lines.push(`    ${field}: ${err.message}`);
+      }
+    }
+    if (sectionErrors.length > 5) {
+      lines.push(`    ... and ${sectionErrors.length - 5} more errors in ${section}`);
+    }
+  }
+
+  lines.push('');
+  lines.push('Common fixes:');
+  lines.push('  1. Re-run: rx-diet original.json  (re-dehydrate from the original JSON)');
+  lines.push('  2. Check that all <!-- id:... --> comments are intact');
+  lines.push('  3. Verify pipe-delimited headings use the correct format: ### Field1 | Field2 | Field3');
+  lines.push('  4. Ensure all required fields (name, email, etc.) exist in the markdown');
+  lines.push('  5. If a custom field is missing its "text" value, add it back in the markdown');
+
+  return lines.join('\n');
+}
 
 // ─── Main Pipeline ──────────────────────────────────────────────────────
 
@@ -176,21 +219,9 @@ export async function rehydrate(
   normalizeResume(mergeResult.merged);
   const validation = validateResume(mergeResult.merged as unknown);
   if (!validation.valid) {
-    const errorLines = validation.errors
-      ?.map((e) => {
-        const humanPath = e.path
-          .replace(/^\//, '')
-          .replace(/\//g, ' → ')
-          .replace(/~1/g, '/')
-          .replace(/~0/g, '~');
-        return `  ${humanPath}: ${e.message}`;
-      })
-      .join('\n');
     throw new Error(
-      `Merged resume failed schema validation. The output would not be a valid Reactive Resume file.\n` +
-      `Validation errors:\n${errorLines ?? '(unknown)'}\n\n` +
-      `Tip: This usually means the markdown parser produced data that doesn't match the expected format. ` +
-      `Check that all required fields are present and correctly typed.`,
+      `Merged resume failed schema validation. The output would not be a valid Reactive Resume file.\n\n` +
+      formatValidationError(validation.errors ?? []),
     );
   }
 
@@ -471,6 +502,24 @@ function normalizeResume(data: ResumeData): void {
   if (!data.customSections) {
     data.customSections = [];
   }
+
+  // Ensure basics.customFields is always an array
+  if (data.basics && (!data.basics.customFields || !Array.isArray(data.basics.customFields))) {
+    data.basics.customFields = [];
+  }
+
+  // Fill missing metadata (required by rx-ruler)
+  if (!data.metadata) {
+    data.metadata = {
+      template: "",
+      layout: { sidebarWidth: 35, pages: [{ fullWidth: false, main: [], sidebar: [] }] },
+      page: { gapX: 4, gapY: 6, marginX: 14, marginY: 12, format: "", locale: "", hideIcons: false },
+      design: { level: { icon: "star", type: "circle" }, colors: { primary: "rgba(0,0,0,1)", text: "rgba(0,0,0,1)", background: "rgba(255,255,255,1)" } },
+      typography: { body: { fontFamily: "Inter", fontWeights: ["400"], fontSize: 11, lineHeight: 1.5 }, heading: { fontFamily: "Inter", fontWeights: ["600"], fontSize: 14, lineHeight: 1.5 } },
+      notes: "",
+    };
+  }
+
   const sections = data.sections as unknown as Record<string, Record<string, unknown> | undefined> | undefined;
   if (sections) {
     const allSectionKeys = ["profiles","experience","education","projects","skills","languages","interests","awards","certifications","publications","volunteer","references"];
@@ -487,29 +536,79 @@ function normalizeResume(data: ResumeData): void {
       const items = section.items as Record<string, unknown>[] | undefined;
       if (items) {
         for (const item of items) {
+          // id: only if truly missing (preserve existing IDs for identity resolution)
+          if (item.id === undefined) item.id = crypto.randomUUID();
           if (item.hidden === undefined) item.hidden = false;
-          if (key === "skills" || key === "languages") {
-            if (item.icon === undefined) item.icon = "";
-            if (item.proficiency === undefined) item.proficiency = "";
-          }
-          if (key === "profiles" && item.icon === undefined) {
-            item.icon = "";
-            item.iconColor = "";
-          }
           if (item.website === undefined) {
-            item.website = { url: "", label: "" };
+            item.website = { url: "", label: "", inlineLink: false };
           }
-          // Fill required string fields with empty defaults
-          if (key === "experience" || key === "education" || key === "projects" || key === "volunteer") {
+
+          // ── Section-specific required fields ──
+          if (key === "profiles") {
+            if (item.icon === undefined) item.icon = "";
+            if (item.iconColor === undefined) item.iconColor = "";
+            if (item.network === undefined) item.network = "";
+            if (item.username === undefined) item.username = "";
+          } else if (key === "experience") {
+            if (item.company === undefined) item.company = "";
+            if (item.position === undefined) item.position = "";
+            if (item.location === undefined) item.location = "";
             if (item.period === undefined) item.period = "";
-          }
-          if (key === "education") {
+            if (item.description === undefined) item.description = "";
+            if (item.roles === undefined) item.roles = [];
+          } else if (key === "education") {
+            if (item.school === undefined) item.school = "";
+            if (item.degree === undefined) item.degree = "";
+            if (item.area === undefined) item.area = "";
             if (item.grade === undefined) item.grade = "";
             if (item.location === undefined) item.location = "";
-          }
-          if (key === "references") {
+            if (item.period === undefined) item.period = "";
+            if (item.description === undefined) item.description = "";
+          } else if (key === "projects") {
+            if (item.name === undefined) item.name = "";
+            if (item.period === undefined) item.period = "";
+            if (item.description === undefined) item.description = "";
+          } else if (key === "skills") {
+            if (item.icon === undefined) item.icon = "";
+            if (item.iconColor === undefined) item.iconColor = "";
+            if (item.name === undefined) item.name = "";
+            if (item.proficiency === undefined) item.proficiency = "";
+            if (item.level === undefined) item.level = 0;
+            if (item.keywords === undefined) item.keywords = [];
+          } else if (key === "languages") {
+            if (item.language === undefined) item.language = "";
+            if (item.fluency === undefined) item.fluency = "";
+            if (item.level === undefined) item.level = 0;
+          } else if (key === "interests") {
+            if (item.icon === undefined) item.icon = "";
+            if (item.iconColor === undefined) item.iconColor = "";
+            if (item.name === undefined) item.name = "";
+            if (item.keywords === undefined) item.keywords = [];
+          } else if (key === "awards") {
+            if (item.title === undefined) item.title = "";
+            if (item.awarder === undefined) item.awarder = "";
+            if (item.date === undefined) item.date = "";
+            if (item.description === undefined) item.description = "";
+          } else if (key === "certifications") {
+            if (item.title === undefined) item.title = "";
+            if (item.issuer === undefined) item.issuer = "";
+            if (item.date === undefined) item.date = "";
+            if (item.description === undefined) item.description = "";
+          } else if (key === "publications") {
+            if (item.title === undefined) item.title = "";
+            if (item.publisher === undefined) item.publisher = "";
+            if (item.date === undefined) item.date = "";
+            if (item.description === undefined) item.description = "";
+          } else if (key === "volunteer") {
+            if (item.organization === undefined) item.organization = "";
+            if (item.location === undefined) item.location = "";
+            if (item.period === undefined) item.period = "";
+            if (item.description === undefined) item.description = "";
+          } else if (key === "references") {
+            if (item.name === undefined) item.name = "";
             if (item.position === undefined) item.position = "";
             if (item.phone === undefined) item.phone = "";
+            if (item.description === undefined) item.description = "";
           }
         }
       }

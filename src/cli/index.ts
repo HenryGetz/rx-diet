@@ -4,6 +4,7 @@ import { dehydrateFile } from '../dehydrate/index.js';
 import { rehydrateFile } from '../rehydrate/index.js';
 import { detectOperation, derivePaths, readStdin, writeTextFile } from '../utils/file.js';
 import { getPrompt } from './prompt.js';
+import { lintRxResumeMd } from './lint.js';
 import type { DehydrateResult } from '../dehydrate/types.js';
 import type { RehydrateResult } from '../rehydrate/index.js';
 
@@ -16,6 +17,7 @@ interface CliOptions {
   dryRun?: boolean;
   confirm?: boolean;
   prompt?: boolean;
+  lint?: boolean;
   jsonErrors?: boolean;
 }
 
@@ -39,6 +41,7 @@ program
   .option('--dry-run', 'Run full pipeline, print result to stdout, write nothing')
   .option('--confirm', 'Required when fuzzy-match identity resolution is used')
   .option('--prompt', 'Print the recommended LLM system prompt to stdout')
+  .option('--lint', 'Validate .rxresume.md format without rehydrating')
   .option('--json-errors', 'Emit errors as structured JSON to stderr')
   .action(async (inputs: string[], options: CliOptions) => {
     if (options.prompt) {
@@ -49,6 +52,31 @@ program
     if (!inputs || inputs.length === 0) {
       console.error('Error: no input files specified');
       process.exit(1);
+    }
+
+    if (options.lint) {
+      let hasErrors = false;
+      for (const input of inputs) {
+        try {
+          const result = await lintRxResumeMd(input);
+          if (result.errors.length === 0) {
+            console.error(`\u2713 ${input}: format is valid`);
+          } else {
+            hasErrors = true;
+            console.error(`\u2717 ${input}: ${result.errors.length} issue(s) found`);
+            for (const err of result.errors) {
+              console.error(`  ${err.type}: ${err.message}`);
+              if (err.line) console.error(`    at line ${err.line}: ${err.context}`);
+              if (err.fix) console.error(`    Fix: ${err.fix}`);
+            }
+          }
+        } catch (error) {
+          hasErrors = true;
+          const msg = error instanceof Error ? error.message : String(error);
+          console.error(`\u2717 ${input}: ${msg}`);
+        }
+      }
+      process.exit(hasErrors ? 1 : 0);
     }
 
     let successCount = 0;

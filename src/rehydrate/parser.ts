@@ -91,14 +91,30 @@ function extractBasics(body: string): Record<string, unknown> {
   const firstSection = body.search(/\n## /);
   const preamble = firstSection === -1 ? body : body.slice(0, firstSection);
 
+  let headline: string | null = null;
+
   for (const line of preamble.split('\n')) {
     const trimmed = line.trim();
-    if (!trimmed || trimmed.startsWith('#')) continue;
-    const colonIdx = trimmed.indexOf(':');
-    if (colonIdx === -1) continue;
-    const key = trimmed.slice(0, colonIdx).trim().toLowerCase();
-    const value = trimmed.slice(colonIdx + 1).trim();
-    if (key && value) {
+    if (!trimmed) continue;
+
+    if (trimmed.startsWith('# ') && !trimmed.startsWith('## ')) {
+      basics.name = trimmed.slice(2).trim();
+      continue;
+    }
+
+    if (trimmed.startsWith('#')) continue;
+
+    if (!headline && !trimmed.startsWith('-') && !trimmed.startsWith('<!--')) {
+      headline = trimmed;
+      basics.headline = trimmed;
+      continue;
+    }
+
+    // Parse definition list: - **Key**: value
+    const dlMatch = trimmed.match(/^-\s+\*\*(.+?)\*\*:\s*(.+)/);
+    if (dlMatch) {
+      const key = dlMatch[1]!.toLowerCase();
+      const value = dlMatch[2]!;
       basics[key] = value;
     }
   }
