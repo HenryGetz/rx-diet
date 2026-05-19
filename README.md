@@ -57,6 +57,8 @@ The operation is auto-detected from the file extension: `.json` → dehydrate, `
 | `--dry-run` | Run full pipeline, print result to stdout, write nothing |
 | `--confirm` | Required when fuzzy-match identity resolution is used |
 | `--prompt` | Print the recommended LLM system prompt to stdout |
+| `--lint` | Validate `.rxresume.md` format without rehydrating |
+| `--fix` | Auto-repair common formatting issues in `.rxresume.md` |
 | `--json-errors` | Emit errors as structured JSON to stderr |
 | `-h, --help` | Show help |
 | `-V, --version` | Show version |

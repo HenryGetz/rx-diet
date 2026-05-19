@@ -19,7 +19,7 @@
   "files": [
     "dist/",
     "bin/",
-    "src/schema/v5/rr-schema.json",
+    "src/schema/v5/resume.schema.json",
     "README.md",
     "LICENSE"
   ],
@@ -28,8 +28,6 @@
     "dev": "tsx src/index.ts",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:property": "vitest run --config vitest.property.config.ts",
-    "test:llm": "vitest run --config vitest.llm.config.ts",
     "lint": "tsc --noEmit",
     "prepublishOnly": "npm run build"
   },
