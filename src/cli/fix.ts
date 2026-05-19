@@ -7,7 +7,7 @@ export interface FixResult {
   content: string;
 }
 
-export async function fixRxResumeMd(path: string): Promise<FixResult> {
+export async function fixRxResumeMd(path: string, dryRun = false): Promise<FixResult> {
   const fixed: string[] = [];
   const unfixed: string[] = [];
 
@@ -17,6 +17,8 @@ export async function fixRxResumeMd(path: string): Promise<FixResult> {
   } catch (e) {
     return { fixed, unfixed: [`Cannot read file: ${e instanceof Error ? e.message : String(e)}`], content: "" };
   }
+
+  // ── Whitespace fixes ─────────────────────────────────────────────
 
   let prev = content;
   content = content.replace(/[ \t]+$/gm, "");
@@ -29,6 +31,21 @@ export async function fixRxResumeMd(path: string): Promise<FixResult> {
   prev = content;
   content = content.replace(/^(\s*[-*+])\s{2,}/gm, "$1 ");
   if (content !== prev) fixed.push("Normalized bullet spacing");
+
+  // ── Pipe-delimited heading fixes ─────────────────────────────────
+
+  // Fix pipe-delimited headings: normalize "### a | b | c" spacing
+  prev = content;
+  content = content.replace(/^(###\s+.+?)\s*\|\s*/gm, (_, heading) => heading + " | ");
+  content = content.replace(/\|\s+/g, "| ");
+  if (content !== prev) fixed.push("Normalized pipe-delimited heading spacing");
+
+  // Fix headings with 3+ pipe-delimited parts that have "|" directly against text
+  prev = content;
+  content = content.replace(/^(###\s+.+?)\|(.+)$/gm, "$1 | $2");
+  if (content !== prev) fixed.push("Normalized pipe spacing in headings");
+
+  // ── Frontmatter extraction ───────────────────────────────────────
 
   const fmStart = content.startsWith("---\n") ? 0 : -1;
   const fmEnd = fmStart === 0 ? content.indexOf("\n---\n", 4) : -1;
@@ -54,6 +71,35 @@ export async function fixRxResumeMd(path: string): Promise<FixResult> {
     body = content.slice(bodyStart + 1);
     fixed.push("Added missing closing --- to frontmatter");
   }
+
+  // ── Frontmatter key typo fixes ───────────────────────────────────
+
+  const FM_KEY_FIXES: Record<string, string> = {
+    "rx diet version": "rx_diet_version",
+    "rx_diet_verison": "rx_diet_version",
+    "rx_diet_verson": "rx_diet_version",
+    "rx resume schema": "rxresume_schema",
+    "rxresume schema": "rxresume_schema",
+    "rx_resume_schema": "rxresume_schema",
+    "rx resume_schema": "rxresume_schema",
+  };
+
+  let fmChanged = false;
+  for (const [typo, correct] of Object.entries(FM_KEY_FIXES)) {
+    const escaped = typo.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const regex = new RegExp(`^${escaped}(?=\\s*:)`, "gm");
+    let match: RegExpExecArray | null;
+    while ((match = regex.exec(frontmatterRaw)) !== null) {
+      frontmatterRaw = frontmatterRaw.slice(0, match.index) + correct + frontmatterRaw.slice(match.index + match[0].length);
+      fmChanged = true;
+    }
+  }
+  if (fmChanged) {
+    content = `---\n${frontmatterRaw}\n---\n\n${body}`;
+    fixed.push("Fixed frontmatter key typos");
+  }
+
+  // ── Frontmatter validation ───────────────────────────────────────
 
   let fm: Record<string, unknown> = {};
   let fmValid = true;
@@ -88,12 +134,30 @@ export async function fixRxResumeMd(path: string): Promise<FixResult> {
     }
   }
 
+  // ── Placeholder identity comments for entries missing them ───────
+
+  prev = content;
+  let idCount = 0;
+  content = content.replace(
+    /^(### .+)\n(?!<!--\s*id:)/gm,
+    (match, heading) => {
+      idCount++;
+      return `${heading}\n<!-- id:MISSING_${idCount} -->`;
+    }
+  );
+  if (idCount > 0) fixed.push(`Added ${idCount} placeholder identity comments (<!-- id:MISSING -->) — replace with real UUIDs from base JSON`);
+
+  // ── Final checks ─────────────────────────────────────────────────
+
   if (!content.match(/^# /m)) {
     unfixed.push("No H1 heading — add '# Your Name' after frontmatter");
   }
 
   if (!content.endsWith("\n")) content += "\n";
 
-  await writeTextFile(path, content);
+  if (!dryRun) {
+    await writeTextFile(path, content);
+  }
+
   return { fixed, unfixed, content };
 }

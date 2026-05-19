@@ -90,6 +90,66 @@ function formatValidationError(errors: Array<{ path: string; message: string }>)
   return lines.join('\n');
 }
 
+function annotateErrorsWithContext(
+  errors: Array<{ path: string; message: string }>,
+  mdContent: string,
+): string {
+  // Build a map of section names → approximate markdown line numbers
+  const sectionLineMap: Record<string, number> = {};
+  const mdLines = mdContent.split('\n');
+  for (let i = 0; i < mdLines.length; i++) {
+    const line = mdLines[i];
+    if (!line) continue;
+    const match = line.match(/^###\s+(\S+)/);
+    if (match && match[1]) {
+      sectionLineMap[match[1].toLowerCase()] = i + 1;
+    }
+  }
+
+  const lines: string[] = [];
+  lines.push('Rehydrate failed: the merged JSON does not pass schema validation.');
+  lines.push('');
+
+  // Group by section
+  const bySection: Record<string, typeof errors> = {};
+  for (const err of errors) {
+    const section = err.path.split('.')[0]
+      || err.path.replace(/^\//, '').split('/')[0]
+      || 'root';
+    if (!bySection[section]) bySection[section] = [];
+    bySection[section].push(err);
+  }
+
+  for (const [section, sectionErrors] of Object.entries(bySection)) {
+    const lineNo = sectionLineMap[section.toLowerCase()];
+    const lineInfo = lineNo ? ` (near markdown line ${lineNo})` : '';
+    lines.push(`  ${section}${lineInfo}:`);
+    for (const err of sectionErrors.slice(0, 3)) {
+      const field = err.path.split('.').pop() || err.path.split('/').pop() || err.path;
+      if (err.message.includes('missing') || err.message.includes("is required")) {
+        lines.push(`    Missing: ${field} — check the .rxresume.md for this field`);
+      } else if (err.message.includes('expected') || err.message.includes('must be')) {
+        lines.push(`    Wrong type: ${field} — ${err.message}`);
+      } else {
+        lines.push(`    ${field}: ${err.message}`);
+      }
+    }
+    if (sectionErrors.length > 3) {
+      lines.push(`    ... and ${sectionErrors.length - 3} more`);
+    }
+  }
+
+  lines.push('');
+  lines.push('How to fix:');
+  lines.push('  1. rx-diet resume.json                  — re-dehydrate from original');
+  lines.push('  2. rx-diet resume.rxresume.md --lint     — find format issues');
+  lines.push('  3. rx-diet resume.rxresume.md --fix      — auto-repair formatting');
+  lines.push('  4. Check <!-- id:... --> comments are intact after LLM edits');
+  lines.push('  5. Verify pipe-delimited headings: ### Field1 | Field2 | Field3');
+
+  return lines.join('\n');
+}
+
 // ─── Main Pipeline ──────────────────────────────────────────────────────
 
 export async function rehydrate(
@@ -219,10 +279,7 @@ export async function rehydrate(
   normalizeResume(mergeResult.merged);
   const validation = validateResume(mergeResult.merged as unknown);
   if (!validation.valid) {
-    throw new Error(
-      `Merged resume failed schema validation. The output would not be a valid Reactive Resume file.\n\n` +
-      formatValidationError(validation.errors ?? []),
-    );
+    throw new Error(annotateErrorsWithContext(validation.errors ?? [], mdContent));
   }
 
   warnings.push(...mergeResult.warnings);

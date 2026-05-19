@@ -45,8 +45,48 @@ program
   .option('--prompt', 'Print the recommended LLM system prompt to stdout')
   .option('--lint', 'Validate .rxresume.md format without rehydrating')
   .option('--fix', 'Auto-fix common .rxresume.md formatting issues')
-  .option('--json-errors', 'Emit errors as structured JSON to stderr')
-  .action(async (inputs: string[], options: CliOptions) => {
+  .option('--json-errors', 'Emit errors as structured JSON to stderr');
+
+program.addHelpText('after', `
+Examples:
+  # Dehydrate: convert JSON to markdown for LLM editing
+  rx-diet resume.json
+
+  # Rehydrate: apply LLM edits back to JSON
+  rx-diet resume.rxresume.md
+
+  # Preview changes before writing (safe!)
+  rx-diet resume.rxresume.md --diff
+
+  # Edit in-place with automatic backup
+  rx-diet resume.rxresume.md --in-place --backup
+
+  # Validate markdown format without rehydrating
+  rx-diet resume.rxresume.md --lint
+
+  # Auto-fix common formatting issues
+  rx-diet resume.rxresume.md --fix
+
+  # Pipe through stdin/stdout for tool composition
+  cat resume.json | rx-diet - -o - | your-llm-tool | rx-diet - -b resume.json --in-place
+
+  # Print LLM system prompt
+  rx-diet --prompt
+
+  # Get structured errors for agent self-correction
+  rx-diet resume.rxresume.md --json-errors
+
+  # Process multiple files
+  rx-diet *.json
+
+Workflow:
+  1. rx-diet resume.json              → resume.rxresume.md
+  2. [LLM edits resume.rxresume.md]
+  3. rx-diet resume.rxresume.md --diff → preview changes
+  4. rx-diet resume.rxresume.md --in-place --backup → apply
+`);
+
+program.action(async (inputs: string[], options: CliOptions) => {
     if (options.prompt) {
       console.log(getPrompt());
       return;
@@ -86,7 +126,10 @@ program
       let anyFixed = false;
       for (const input of inputs) {
         try {
-          const result = await fixRxResumeMd(input);
+          const result = await fixRxResumeMd(input, !!options.dryRun);
+          if (options.dryRun && result.content) {
+            console.log(result.content);
+          }
           if (result.fixed.length === 0 && result.unfixed.length === 0) {
             console.error(`${input}: nothing to fix`);
           } else {

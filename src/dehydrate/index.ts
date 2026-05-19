@@ -30,10 +30,15 @@ export async function dehydrate(
 
   const validation = validateResumeLenient(data as unknown);
   if (!validation.valid) {
+    const errorList = validation.errors?.map(e => `  ${e.path}: ${e.message}`).join('\n');
     throw new Error(
-      `Invalid resume JSON:\n${
-        validation.errors?.map(e => `  ${e.path}: ${e.message}`).join('\n')
-      }`
+      `Input JSON is not valid Reactive Resume format.\n\n` +
+      `Validation errors:\n${errorList}\n\n` +
+      `Common causes:\n` +
+      `  - Missing required fields (picture, basics, summary, etc.)\n` +
+      `  - Wrong data types (expected string, got number)\n` +
+      `  - Extra properties not in the schema\n\n` +
+      `Tip: JSON Resume format files are accepted with warnings. Only clearly invalid JSON is rejected.`
     );
   }
 
