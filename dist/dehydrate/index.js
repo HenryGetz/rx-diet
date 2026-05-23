@@ -109,7 +109,7 @@ export async function dehydrateFile(inputPath, options) {
     const paths = derivePaths(inputPath);
     const mdPath = options?.output ?? paths.md;
     const lockPath = options?.output
-        ? options.output.replace(/\.rxresume\.md$/, ".rxresume.lock.json")
+        ? options.output.replace(/\.(?:rxresume\.)?md$/, ".rxresume.lock.json")
         : paths.lock;
     await writeTextFile(mdPath, result.markdown);
     await writeJsonFile(lockPath, { id_map: result.idMap }, true);
