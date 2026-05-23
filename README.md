@@ -14,26 +14,32 @@ A minimal-dependency CLI that puts your resume on a strict, carb-free fast befor
 ## Installation
 
 ```bash
-npm install -g rx-diet
+npx HenryGetz/rx-diet
 ```
 
-Or run directly:
+Or install globally:
 
 ```bash
-npx rx-diet resume.json
+npm install -g HenryGetz/rx-diet
 ```
+
+> **Note**: If the global install above fails on npm ≥ 11 (a known npm bug with git-based global installs), use the `npx` command or clone manually:
+> ```bash
+> git clone https://github.com/HenryGetz/rx-diet.git
+> cd rx-diet && npm install && npm link
+> ```
 
 ## Quick Start
 
 ```bash
 # Dehydrate: JSON → Markdown
-rx-diet resume.json
+npx HenryGetz/rx-diet resume.json
 # → resume.rxresume.md
 
 # Edit the markdown (by hand or via LLM)
 
 # Rehydrate: Markdown → JSON
-rx-diet resume.rxresume.md
+npx HenryGetz/rx-diet resume.rxresume.md
 # → resume_updated.json
 ```
 
