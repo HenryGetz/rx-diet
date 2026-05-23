@@ -29,6 +29,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "tsc --noEmit",
+    "prepare": "npm run build",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
@@ -36,7 +37,7 @@
     "commander": "^13.1.0",
     "js-yaml": "^4.1.0",
     "marked": "^15.0.12",
-    "rx-ruler": "file:../rx-ruler",
+    "rx-ruler": "github:HenryGetz/rx-ruler",
     "turndown": "^7.2.1"
   },
   "devDependencies": {
