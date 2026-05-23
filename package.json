@@ -54,12 +54,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/HenryGetz/rx-diet"
-  },
-  "files": [
-    "bin/",
-    "dist/",
-    "src/schema/v5/resume.schema.json",
-    "README.md",
-    "LICENSE"
-  ]
+  }
 }
