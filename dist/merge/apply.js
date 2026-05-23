@@ -110,4 +110,3 @@ export function applyMerge(base, parsedSections) {
     }
     return { merged, changes, warnings };
 }
-//# sourceMappingURL=apply.js.map

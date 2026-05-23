@@ -42,4 +42,3 @@ function parseReferenceItem(entry) {
 export function normalizeReferences(section) {
     return section.entries.map(entry => parseReferenceItem(entry));
 }
-//# sourceMappingURL=definition.js.map

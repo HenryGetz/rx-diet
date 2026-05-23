@@ -45,4 +45,3 @@ export const SECTION_SERIALIZERS = {
     publications: wrap(serializePublications),
     volunteer: wrap(serializeVolunteer),
 };
-//# sourceMappingURL=index.js.map

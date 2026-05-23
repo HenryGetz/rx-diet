@@ -17,4 +17,3 @@ export function normalizeSummary(parsed, title) {
         content,
     };
 }
-//# sourceMappingURL=summary.js.map

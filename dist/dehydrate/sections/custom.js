@@ -125,4 +125,3 @@ export function serializeCustom(section) {
     }
     return `## ${section.title}\n\n${blocks.join('\n\n')}`;
 }
-//# sourceMappingURL=custom.js.map

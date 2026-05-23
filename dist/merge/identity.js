@@ -97,4 +97,3 @@ export function resolveIdentity(entryText, fm, sectionName, index, sectionType, 
     }
     return { resolved: false, reason: 'No matching entry found in base JSON' };
 }
-//# sourceMappingURL=identity.js.map

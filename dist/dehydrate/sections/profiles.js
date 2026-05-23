@@ -26,4 +26,3 @@ export function serializeProfiles(section) {
     });
     return `## ${section.title || 'Profiles'}\n\n${lines.join('\n')}`;
 }
-//# sourceMappingURL=profiles.js.map

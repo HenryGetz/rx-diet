@@ -24,4 +24,3 @@ export declare function markdownToHtml(md: string): string;
  * equivalent HTML documents can be compared string-for-string.
  */
 export declare function normalizeHtml(html: string): string;
-//# sourceMappingURL=markdown.d.ts.map

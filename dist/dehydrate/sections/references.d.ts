@@ -9,4 +9,3 @@ import type { ReferencesSection } from '../../utils/types.js';
  * remain.
  */
 export declare function serializeReferences(section: ReferencesSection): string;
-//# sourceMappingURL=references.d.ts.map

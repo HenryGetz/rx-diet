@@ -37,4 +37,3 @@ export declare function readStdin(): Promise<string>;
  * - `.rxresume.md` → `'rehydrate'`   (Markdown → JSON)
  */
 export declare function detectOperation(path: string): 'dehydrate' | 'rehydrate';
-//# sourceMappingURL=file.d.ts.map

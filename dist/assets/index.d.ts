@@ -34,4 +34,3 @@ export declare function readAssetStore(path: string): Promise<AssetStore>;
  * Only writes if the store is non-empty (avoid creating empty sidecar files).
  */
 export declare function writeAssetStore(path: string, store: AssetStore): Promise<void>;
-//# sourceMappingURL=index.d.ts.map

@@ -19,4 +19,3 @@ export interface DiffResult {
 export declare const DIFF_NO_CHANGES = 0;
 export declare const DIFF_CHANGES = 1;
 export declare const DIFF_ERROR = 2;
-//# sourceMappingURL=types.d.ts.map

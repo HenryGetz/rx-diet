@@ -53,4 +53,3 @@ export function serializeReferences(section) {
     }
     return `## ${section.title || 'References'}\n\n${blocks.join('\n\n')}`;
 }
-//# sourceMappingURL=references.js.map

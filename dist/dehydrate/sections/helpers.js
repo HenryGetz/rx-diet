@@ -50,4 +50,3 @@ export function normalizePeriod(period) {
     });
     return normalized.join(' - ');
 }
-//# sourceMappingURL=helpers.js.map

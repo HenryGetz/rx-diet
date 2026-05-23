@@ -117,4 +117,3 @@ export function buildIdMap(data) {
     }
     return map;
 }
-//# sourceMappingURL=yaml.js.map

@@ -27,4 +27,3 @@ export function serializeCertifications(section) {
     }
     return lines.join('\n').trimEnd() + '\n';
 }
-//# sourceMappingURL=certifications.js.map

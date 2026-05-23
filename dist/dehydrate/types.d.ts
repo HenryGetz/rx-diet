@@ -10,4 +10,3 @@ export interface DehydrateOptions {
     output?: string;
     base?: string;
 }
-//# sourceMappingURL=types.d.ts.map

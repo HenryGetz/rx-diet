@@ -150,4 +150,3 @@ export function normalizeListSection(section) {
         return [];
     return section.entries.map(entry => parser(entry));
 }
-//# sourceMappingURL=list.js.map

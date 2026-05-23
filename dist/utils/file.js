@@ -89,4 +89,3 @@ export function detectOperation(path) {
     }
     throw new Error(`Cannot detect operation for "${path}". Expected a .json (dehydrate) or .rxresume.md (rehydrate) file.`);
 }
-//# sourceMappingURL=file.js.map

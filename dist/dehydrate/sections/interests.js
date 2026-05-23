@@ -30,4 +30,3 @@ export function serializeInterests(section) {
     }
     return `## ${section.title || 'Interests'}\n\n${blocks.join('\n\n')}`;
 }
-//# sourceMappingURL=interests.js.map

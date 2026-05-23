@@ -102,4 +102,3 @@ function extractPosition(item) {
     }
     return '';
 }
-//# sourceMappingURL=hash.js.map

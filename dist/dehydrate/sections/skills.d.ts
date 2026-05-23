@@ -8,4 +8,3 @@ import type { SkillsSection } from '../../utils/types.js';
  * remain.
  */
 export declare function serializeSkills(section: SkillsSection): string;
-//# sourceMappingURL=skills.d.ts.map

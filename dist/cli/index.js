@@ -259,4 +259,3 @@ function getSuggestion(err) {
         return 'Ensure the input file exists and the path is correct.';
     return 'Check the file format and try again.';
 }
-//# sourceMappingURL=index.js.map

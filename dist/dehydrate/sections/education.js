@@ -45,4 +45,3 @@ export function serializeEducation(section) {
     }
     return lines.join('\n').trimEnd() + '\n';
 }
-//# sourceMappingURL=education.js.map

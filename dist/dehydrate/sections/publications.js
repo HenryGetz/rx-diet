@@ -27,4 +27,3 @@ export function serializePublications(section) {
     }
     return lines.join('\n').trimEnd() + '\n';
 }
-//# sourceMappingURL=publications.js.map

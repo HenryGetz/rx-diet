@@ -27,4 +27,3 @@ export function serializeAwards(section) {
     }
     return lines.join('\n').trimEnd() + '\n';
 }
-//# sourceMappingURL=awards.js.map

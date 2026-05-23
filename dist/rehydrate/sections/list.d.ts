@@ -7,4 +7,3 @@ import type { ParsedSection } from '../types.js';
  * is not recognised as a list-type section.
  */
 export declare function normalizeListSection(section: ParsedSection): Record<string, unknown>[];
-//# sourceMappingURL=list.d.ts.map

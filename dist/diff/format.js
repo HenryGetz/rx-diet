@@ -39,4 +39,3 @@ function formatPrefix(type) {
         default: return '  ';
     }
 }
-//# sourceMappingURL=format.js.map

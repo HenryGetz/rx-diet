@@ -8,4 +8,3 @@ import type { ParsedSection } from '../types.js';
  * name is not recognised as a standard section.
  */
 export declare function normalizeStandardSection(section: ParsedSection): Record<string, unknown>[];
-//# sourceMappingURL=standard.d.ts.map

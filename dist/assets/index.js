@@ -176,4 +176,3 @@ function lookupSentinel(str, store) {
     const storeKey = str.slice(ASSET_SENTINEL_PREFIX.length);
     return store[storeKey];
 }
-//# sourceMappingURL=index.js.map

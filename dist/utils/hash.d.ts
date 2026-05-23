@@ -15,4 +15,3 @@ export declare function fingerprintMatch(a: string, b: string): boolean;
  * matching against external data or detecting duplicate entries.
  */
 export declare function buildContentKey(sectionType: string, item: Record<string, unknown>): string;
-//# sourceMappingURL=hash.d.ts.map

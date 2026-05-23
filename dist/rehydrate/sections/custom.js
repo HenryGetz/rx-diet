@@ -68,4 +68,3 @@ function normalizeCustomEntry(entry) {
 export function normalizeCustomSection(section) {
     return section.entries.map(entry => normalizeCustomEntry(entry));
 }
-//# sourceMappingURL=custom.js.map

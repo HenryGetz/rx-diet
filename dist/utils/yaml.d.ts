@@ -15,4 +15,3 @@ export declare function serializeFrontmatter(fm: RxFrontmatter): string;
  * Maps paths like "sections.experience.0" to the item's UUID.
  */
 export declare function buildIdMap(data: ResumeData): Record<string, string>;
-//# sourceMappingURL=yaml.d.ts.map

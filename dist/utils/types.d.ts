@@ -249,4 +249,3 @@ export interface RxFrontmatter {
 }
 export type SectionName = keyof Sections;
 export declare const ASSET_SENTINEL_PREFIX = "__rx_diet_asset__:";
-//# sourceMappingURL=types.d.ts.map

@@ -31,4 +31,3 @@ export function serializeSkills(section) {
     }
     return `## ${section.title || 'Skills'}\n\n${lines.join('\n')}`;
 }
-//# sourceMappingURL=skills.js.map

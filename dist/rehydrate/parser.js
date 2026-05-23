@@ -204,4 +204,3 @@ export function convertEntryFieldsToHtml(fields) {
     }
     return result;
 }
-//# sourceMappingURL=parser.js.map

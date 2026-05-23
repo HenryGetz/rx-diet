@@ -11,4 +11,3 @@ import type { DiffResult } from './types.js';
  */
 export declare function computeDiff(base: ResumeData, updated: ResumeData): DiffResult;
 export declare function getExitCode(result: DiffResult): number;
-//# sourceMappingURL=index.d.ts.map

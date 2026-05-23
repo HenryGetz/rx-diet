@@ -39,4 +39,3 @@ export function validateResumeLenient(data) {
     // Pass strict errors as warnings but don't block
     return { valid: true };
 }
-//# sourceMappingURL=index.js.map

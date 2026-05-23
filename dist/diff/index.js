@@ -171,4 +171,3 @@ export function getExitCode(result) {
         return 2;
     return result.hasChanges ? DIFF_CHANGES : DIFF_NO_CHANGES;
 }
-//# sourceMappingURL=index.js.map

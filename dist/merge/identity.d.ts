@@ -44,4 +44,3 @@ export declare function resolveByFuzzy<T extends {
 export declare function resolveIdentity<T extends {
     id: string;
 }>(entryText: string, fm: RxFrontmatter, sectionName: SectionName, index: number, sectionType: string, markdownFields: Record<string, string | undefined>, baseItems: T[]): IdentityResolution;
-//# sourceMappingURL=identity.d.ts.map

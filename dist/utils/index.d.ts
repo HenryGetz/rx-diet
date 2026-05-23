@@ -3,4 +3,3 @@ export * from './file.js';
 export * from './yaml.js';
 export * from './markdown.js';
 export * from './hash.js';
-//# sourceMappingURL=index.d.ts.map

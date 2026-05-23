@@ -69,4 +69,3 @@ export function mergeEntry(baseItem, markdownFields, sectionType, resolution) {
     }
     return result;
 }
-//# sourceMappingURL=merge.js.map

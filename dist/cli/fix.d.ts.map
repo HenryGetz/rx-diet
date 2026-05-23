@@ -1,1 +1,0 @@
-{"version":3,"file":"fix.d.ts","sourceRoot":"","sources":["../../src/cli/fix.ts"],"names":[],"mappings":"AAGA,MAAM,WAAW,SAAS;IACxB,KAAK,EAAE,MAAM,EAAE,CAAC;IAChB,OAAO,EAAE,MAAM,EAAE,CAAC;IAClB,OAAO,EAAE,MAAM,CAAC;CACjB;AAED,wBAAsB,aAAa,CAAC,IAAI,EAAE,MAAM,EAAE,MAAM,UAAQ,GAAG,OAAO,CAAC,SAAS,CAAC,CAyJpF"}

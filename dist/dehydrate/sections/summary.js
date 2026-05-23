@@ -9,4 +9,3 @@ export function serializeSummary(summary) {
     }
     return `## Summary\n\n${content}`;
 }
-//# sourceMappingURL=summary.js.map

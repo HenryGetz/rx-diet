@@ -19,4 +19,3 @@ export function serializeLanguages(section) {
     const lines = visible.map((item) => `- **${item.language}**: ${item.fluency} (${item.level}/5)`);
     return `## ${section.title || 'Languages'}\n\n${lines.join('\n')}`;
 }
-//# sourceMappingURL=languages.js.map

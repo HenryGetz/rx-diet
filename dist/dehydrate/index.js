@@ -310,4 +310,3 @@ function normalizeResume(data) {
         }
     }
 }
-//# sourceMappingURL=index.js.map

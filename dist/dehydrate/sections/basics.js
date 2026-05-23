@@ -49,4 +49,3 @@ export function serializeBasics(basics) {
     }
     return parts.join('\n\n');
 }
-//# sourceMappingURL=basics.js.map

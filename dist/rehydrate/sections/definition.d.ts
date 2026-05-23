@@ -5,4 +5,3 @@ import type { ParsedSection } from '../types.js';
  * matching the RR schema.
  */
 export declare function normalizeReferences(section: ParsedSection): ReferenceItem[];
-//# sourceMappingURL=definition.d.ts.map

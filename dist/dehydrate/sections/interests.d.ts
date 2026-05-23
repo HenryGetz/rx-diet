@@ -7,4 +7,3 @@ import type { InterestsSection } from '../../utils/types.js';
  * Returns an empty string when no visible items remain.
  */
 export declare function serializeInterests(section: InterestsSection): string;
-//# sourceMappingURL=interests.d.ts.map

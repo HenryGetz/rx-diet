@@ -31,4 +31,3 @@ export function serializeVolunteer(section) {
     }
     return lines.join('\n').trimEnd() + '\n';
 }
-//# sourceMappingURL=volunteer.js.map

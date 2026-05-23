@@ -44,4 +44,3 @@ export interface ParseResult {
     /** All sections in document order */
     sections: ParsedSection[];
 }
-//# sourceMappingURL=types.d.ts.map

@@ -7,4 +7,3 @@ import type { LanguagesSection } from '../../utils/types.js';
  * Returns an empty string when no visible items remain.
  */
 export declare function serializeLanguages(section: LanguagesSection): string;
-//# sourceMappingURL=languages.d.ts.map

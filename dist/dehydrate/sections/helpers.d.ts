@@ -6,4 +6,3 @@
  */
 export declare function normalizeDate(date: string): string;
 export declare function normalizePeriod(period: string): string;
-//# sourceMappingURL=helpers.d.ts.map

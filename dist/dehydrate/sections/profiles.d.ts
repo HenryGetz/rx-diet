@@ -8,4 +8,3 @@ import type { ProfilesSection } from '../../utils/types.js';
  * remain.
  */
 export declare function serializeProfiles(section: ProfilesSection): string;
-//# sourceMappingURL=profiles.d.ts.map

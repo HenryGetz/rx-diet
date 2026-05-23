@@ -19,4 +19,3 @@ export interface RehydrateResult {
 }
 export declare function rehydrate(mdPath: string, options?: RehydrateOptions): Promise<RehydrateResult>;
 export declare function rehydrateFile(inputPath: string, options?: RehydrateOptions): Promise<RehydrateResult>;
-//# sourceMappingURL=index.d.ts.map

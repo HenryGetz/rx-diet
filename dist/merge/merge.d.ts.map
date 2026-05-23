@@ -1,1 +1,0 @@
-{"version":3,"file":"merge.d.ts","sourceRoot":"","sources":["../../src/merge/merge.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,kBAAkB,EAAE,MAAM,eAAe,CAAC;AA8CxD;;;;;;;;;;;;;GAaG;AACH,wBAAgB,UAAU,CAAC,CAAC,SAAS,MAAM,CAAC,MAAM,EAAE,OAAO,CAAC,EAC1D,QAAQ,EAAE,CAAC,EACX,cAAc,EAAE,MAAM,CAAC,MAAM,EAAE,OAAO,CAAC,EACvC,WAAW,EAAE,MAAM,EACnB,UAAU,EAAE,kBAAkB,GAC7B,CAAC,CAiBH"}

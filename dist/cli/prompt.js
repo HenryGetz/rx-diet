@@ -44,4 +44,3 @@ Everything else stays unchanged.`;
 export function getPrompt() {
     return LLM_SYSTEM_PROMPT;
 }
-//# sourceMappingURL=prompt.js.map

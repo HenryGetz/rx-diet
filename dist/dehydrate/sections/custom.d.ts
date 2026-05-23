@@ -13,4 +13,3 @@ import type { CustomSection } from '../../utils/types.js';
  * Returns an empty string when no visible items remain.
  */
 export declare function serializeCustom(section: CustomSection): string;
-//# sourceMappingURL=custom.d.ts.map

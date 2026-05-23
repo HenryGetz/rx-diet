@@ -124,4 +124,3 @@ export function normalizeStandardSection(section) {
         return [];
     return section.entries.map(entry => builder(entry));
 }
-//# sourceMappingURL=standard.js.map

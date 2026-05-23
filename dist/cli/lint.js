@@ -114,4 +114,3 @@ export async function lintRxResumeMd(path) {
     }
     return { errors };
 }
-//# sourceMappingURL=lint.js.map

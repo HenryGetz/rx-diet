@@ -9,4 +9,3 @@ import type { Basics } from '../../utils/types.js';
  *   customFields: Array<{ display: string; value: string }>
  */
 export declare function normalizeBasics(raw: Record<string, unknown>): Basics;
-//# sourceMappingURL=basics.d.ts.map

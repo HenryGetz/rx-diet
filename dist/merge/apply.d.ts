@@ -37,4 +37,3 @@ export declare function applyMerge(base: ResumeData, parsedSections: Record<stri
     fields: Record<string, unknown>;
     resolution: IdentityResolution;
 }>>): MergeResult;
-//# sourceMappingURL=apply.d.ts.map

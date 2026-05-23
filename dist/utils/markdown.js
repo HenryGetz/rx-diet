@@ -64,4 +64,3 @@ export function normalizeHtml(html) {
         .replace(/\s+</g, '<')
         .trim();
 }
-//# sourceMappingURL=markdown.js.map

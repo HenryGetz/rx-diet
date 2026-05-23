@@ -27,4 +27,3 @@ export function serializeProjects(section) {
     }
     return lines.join('\n').trimEnd() + '\n';
 }
-//# sourceMappingURL=projects.js.map

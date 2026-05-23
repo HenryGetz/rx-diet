@@ -8,4 +8,3 @@ export interface LintError {
 export declare function lintRxResumeMd(path: string): Promise<{
     errors: LintError[];
 }>;
-//# sourceMappingURL=lint.d.ts.map

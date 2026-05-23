@@ -44,4 +44,3 @@ export function serializeExperience(section) {
     }
     return lines.join('\n').trimEnd() + '\n';
 }
-//# sourceMappingURL=experience.js.map

@@ -4,4 +4,3 @@ import type { DiffResult } from './types.js';
  * Matches the sample format from the spec.
  */
 export declare function formatDiff(result: DiffResult): string;
-//# sourceMappingURL=format.d.ts.map

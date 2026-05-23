@@ -10,4 +10,3 @@ import type { SummarySection } from '../../utils/types.js';
 export declare function normalizeSummary(parsed: {
     content: string;
 } | null, title?: string): SummarySection;
-//# sourceMappingURL=summary.d.ts.map

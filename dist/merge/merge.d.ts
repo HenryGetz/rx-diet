@@ -14,4 +14,3 @@ import type { IdentityResolution } from './identity.js';
  * every key present in `markdownFields` is treated as a content field.
  */
 export declare function mergeEntry<T extends Record<string, unknown>>(baseItem: T, markdownFields: Record<string, unknown>, sectionType: string, resolution: IdentityResolution): T;
-//# sourceMappingURL=merge.d.ts.map

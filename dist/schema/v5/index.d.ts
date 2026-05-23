@@ -9,4 +9,3 @@ export interface ValidationResult {
 }
 export declare function validateResume(data: unknown): ValidationResult;
 export declare function validateResumeLenient(data: unknown): ValidationResult;
-//# sourceMappingURL=index.d.ts.map
