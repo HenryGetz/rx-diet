@@ -1,0 +1,1 @@
+{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../src/merge/index.ts"],"names":[],"mappings":"AAAA,YAAY,EAAE,kBAAkB,EAAE,MAAM,eAAe,CAAC;AACxD,OAAO,EACL,aAAa,EACb,eAAe,EACf,cAAc,EACd,cAAc,EACd,eAAe,GAChB,MAAM,eAAe,CAAC;AAEvB,OAAO,EAAE,UAAU,EAAE,MAAM,YAAY,CAAC;AAExC,YAAY,EAAE,WAAW,EAAE,WAAW,EAAE,MAAM,YAAY,CAAC;AAC3D,OAAO,EAAE,UAAU,EAAE,MAAM,YAAY,CAAC"}
